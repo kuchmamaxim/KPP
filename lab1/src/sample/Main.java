@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+//import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +24,20 @@ public class Main extends Application {
 
     public static final double PI = 3.1415;
 
+     static String angleType (Integer Degrees)
+    {
+        if(Degrees >= 0 && Degrees < 90)
+            return "Острый угол";
+        else if(Degrees == 90)
+            return "Прямой угол";
+        else if(Degrees < 180)
+            return "Тупой угол";
+        else if(Degrees == 180)
+            return "Развёрнутый угол";
+        else
+            return "Ошибка! Введите угол до 180 градусов!";
+    }
+
     @Override  public void start(Stage primaryStage) {
         primaryStage.setResizable(true);
         BorderPane root = new BorderPane();
@@ -39,6 +54,7 @@ public class Main extends Application {
         }
 
         Label label = new Label("Градусы");
+        label.setCenterShape(true);
         gridpane.add(label, 0, 0);
         TextField degreesTextField = new TextField();
         gridpane.add(degreesTextField, 1, 0);
@@ -55,26 +71,17 @@ public class Main extends Application {
 
 
         Label angleTypeLabel = new Label (" ");
-        gridpane.add(angleTypeLabel, 0, 2);
+        gridpane.add(angleTypeLabel, 0, 2, 2, 1);
+        //gridpane.set(Pos.CENTER);
 
         calculateRadButton.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent e)
             {
+                double
                 Double Degrees = Double.parseDouble(degreesTextField.getText());
                 Double Radians = new BigDecimal(Degrees*PI / 180).setScale(4, RoundingMode.HALF_UP).doubleValue();
-                if(Degrees >= 0 && Degrees < 90)
-                    angleTypeLabel.setText("Острый угол");
-                else if(Degrees == 90)
-                    angleTypeLabel.setText("Прямой угол");
-                else if(Degrees < 180)
-                    angleTypeLabel.setText("Тупой угол");
-                else if(Degrees == 180)
-                    angleTypeLabel.setText("Развёрнутый угол");
-                else {
-                    angleTypeLabel.setText("Ошибка! Введите угол до 180 градусов!");
-                    return;
-                }
+                angleTypeLabel.setText(angleType(Degrees.intValue()));
                 radianTextField.setText(String.valueOf(Radians));
             }
         });
@@ -85,18 +92,7 @@ public class Main extends Application {
             {
                 Double Radians = Double.parseDouble(radianTextField.getText());
                 Integer Degrees = new BigDecimal(Radians * 180 / PI).setScale(0, RoundingMode.HALF_UP).intValue();
-                if(Degrees >= 0 && Degrees < 90)
-                    angleTypeLabel.setText("Острый угол");
-                else if(Degrees == 90)
-                    angleTypeLabel.setText("Прямой угол");
-                else if(Degrees < 180)
-                    angleTypeLabel.setText("Тупой угол");
-                else if(Degrees == 180)
-                    angleTypeLabel.setText("Развёрнутый угол");
-                else {
-                    angleTypeLabel.setText("Ошибка! Введите угол до 180 градусов!");
-                    return;
-                }
+                angleTypeLabel.setText(angleType(Degrees));
                 degreesTextField.setText(String.valueOf(Degrees));
             }
         });
