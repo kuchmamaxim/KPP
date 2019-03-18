@@ -22,12 +22,17 @@ public class DogFood {
         Random rand = new Random();
         foods = new Vector();
         for (int i = 0; i < n; i++){
-            foods.add(FoodList.get(rand.nextInt(FoodList.size()-2)));
+            foods.add(FoodList.get(rand.nextInt(FoodList.size()-1)));
         }
     }
 
     public String getRandomFood(){
-        Random rand = new Random();
-        return foods.get(rand.nextInt(foods.size()+1)-1).toString();
+        String answer = foods.get(0).toString();
+        foods.remove(0);
+        return answer;
+    }
+
+    public int foodsLeft(){
+        return foods.size();
     }
 }

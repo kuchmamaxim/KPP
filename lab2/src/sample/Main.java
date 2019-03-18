@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -13,9 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class Main extends Application {
 
@@ -33,7 +31,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setResizable(true);
         BorderPane root = new BorderPane();
-        Scene scene = new Scene(root, 450, 200);
+        Scene scene = new Scene(root, 300, 180);
         GridPane gridpane = new GridPane();
         gridpane.setPadding(new Insets(5));
         gridpane.setHgap(5);
@@ -45,9 +43,14 @@ public class Main extends Application {
             gridpane.getColumnConstraints().add(column);
         }
 
-        Label label = new Label("Choose an activity as a dog trainer:");
-        //label.setCenterShape(true);
+        Label label = new Label("Choose an activity as a dog trainer!");
+        label.setAlignment(Pos.CENTER);
         gridpane.add(label, 0, 0, 2, 1);
+        label.setAlignment(Pos.CENTER);
+
+        Label dogLabel = new Label("Choose a dog:");
+        gridpane.add(dogLabel, 0, 1);
+
         TextField commandTextField = new TextField();
         gridpane.add(commandTextField , 0, 2);
 
@@ -57,20 +60,24 @@ public class Main extends Application {
             dogChoice.getItems().addAll(programLogic.getDogList().get(i));
         }
         dogChoice.getSelectionModel().select(1);
+        dogChoice.setMinWidth(135);
         gridpane.add(dogChoice , 1, 1);
 
         Button giveCommandButton = new Button("Give command");
+        giveCommandButton.setMinWidth(135);
+        giveCommandButton.setMaxWidth(135);
         gridpane.add(giveCommandButton, 1, 2);
 
         Button feedButton = new Button("Feed");
+        feedButton.setMinWidth(135);
+        feedButton.setMaxWidth(135);
         gridpane.add(feedButton, 1, 3);
 
 
         Label answerLabel = new Label (" ");
         gridpane.add(answerLabel, 0, 4, 2, 2);
 
-        giveCommandButton.setOnAction(new EventHandler<ActionEvent>()
-        {
+        giveCommandButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
                 int n = getIndexByName(dogChoice.getValue().toString());
@@ -78,8 +85,7 @@ public class Main extends Application {
             }
         });
 
-        feedButton.setOnAction(new EventHandler<ActionEvent>()
-        {
+        feedButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
                 int n = getIndexByName(dogChoice.getValue().toString());
