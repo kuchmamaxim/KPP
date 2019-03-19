@@ -19,16 +19,17 @@ public class Main extends Application {
 
     private Logic programLogic = new Logic();
 
-    private int getIndexByName(String choice){
+    private int getIndexByName(String choice) {
         int n = 0;
-        for (int i = 0; i < programLogic.getDogList().size(); i++) {
-            if (programLogic.getDogList().get(i).equals(choice))
+        for (int i = 0; i < programLogic.getPetList().size(); i++) {
+            if (programLogic.getPetList().get(i).equals(choice))
                 n = i;
         }
         return n;
     }
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         primaryStage.setResizable(true);
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 300, 180);
@@ -36,8 +37,7 @@ public class Main extends Application {
         gridpane.setPadding(new Insets(5));
         gridpane.setHgap(5);
         gridpane.setVgap(5);
-        for (int i = 0; i < 2; i++)
-        {
+        for (int i = 0; i < 2; i++) {
             ColumnConstraints column = new ColumnConstraints();
             column.setPercentWidth(100 / 2.0);
             gridpane.getColumnConstraints().add(column);
@@ -52,16 +52,16 @@ public class Main extends Application {
         gridpane.add(dogLabel, 0, 1);
 
         TextField commandTextField = new TextField();
-        gridpane.add(commandTextField , 0, 2);
+        gridpane.add(commandTextField, 0, 2);
 
         ComboBox dogChoice = new ComboBox();
 
-        for(int i = 0; i<programLogic.getDogList().size(); i++) {
-            dogChoice.getItems().addAll(programLogic.getDogList().get(i));
+        for (int i = 0; i < programLogic.getPetList().size(); i++) {
+            dogChoice.getItems().addAll(programLogic.getPetList().get(i));
         }
         dogChoice.getSelectionModel().select(1);
         dogChoice.setMinWidth(135);
-        gridpane.add(dogChoice , 1, 1);
+        gridpane.add(dogChoice, 1, 1);
 
         Button giveCommandButton = new Button("Give command");
         giveCommandButton.setMinWidth(135);
@@ -74,20 +74,18 @@ public class Main extends Application {
         gridpane.add(feedButton, 1, 3);
 
 
-        Label answerLabel = new Label (" ");
+        Label answerLabel = new Label(" ");
         gridpane.add(answerLabel, 0, 4, 2, 2);
 
         giveCommandButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
+            public void handle(ActionEvent e) {
                 int n = getIndexByName(dogChoice.getValue().toString());
                 answerLabel.setText(programLogic.giveCommand(n, commandTextField.getText().toString()));
             }
         });
 
         feedButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
+            public void handle(ActionEvent e) {
                 int n = getIndexByName(dogChoice.getValue().toString());
                 answerLabel.setText(programLogic.feed(n));
             }

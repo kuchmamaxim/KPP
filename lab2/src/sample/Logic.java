@@ -3,27 +3,31 @@ package sample;
 import java.util.Vector;
 
 public class Logic {
-    private DogTrainer dogTrainer = new DogTrainer();
+    private Master master = new Master();
 
-    private static Vector<String> dogList = new Vector<String>();
-
-    private static Vector<Dog> dogs = new Vector<Dog>();
     Logic (){
-        dogs.add(new Poodle());
-        dogList.add(dogs.get(dogs.size()-1).getName());
-        dogs.add(new Shepherd());
-        dogList.add(dogs.get(dogs.size()-1).getName());
-        dogs.add(new Terrier());
-        dogList.add(dogs.get(dogs.size()-1).getName());
+        master.addCat();
+        master.addDog(dog_types.POODLE);
+        master.addDog(dog_types.SHEPHERD);
+        master.addDog(dog_types.TERRIER);
     }
     public String giveCommand(int i, String command){
-        return dogTrainer.giveACommand(dogs.get(i), command);
+        if (master.pets.get(i) instanceof Cat)
+            return "Cat can't execute your commands!";
+        return master.giveACommand((Dog)master.pets.get(i), command);
     }
 
     public String feed(int i){
-        return dogTrainer.giveFood(dogs.get(i));
+        if (master.pets.get(i) instanceof Cat)
+            return "Cat doesn't eat dog food!";
+        return master.giveFood((Dog) master.pets.get(i));
     }
-    public static Vector getDogList(){
-        return dogList;
+
+    public Vector<String> getPetList() {
+        Vector<String> petList = new Vector<String>();
+        for (int i = 0; i < master.pets.size(); i++) {
+            petList.add(master.pets.get(i).getName());
+        }
+        return petList;
     }
 }
