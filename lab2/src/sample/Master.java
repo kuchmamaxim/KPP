@@ -45,6 +45,6 @@ public class Master {
     String giveFood (Dog dog) {
         if (someFood.foodsLeft() == 0)
             return "error: THERE IS NO FOOD IN YOUR BAG";
-        return dog.eatFood(someFood.getRandomFood());
+        return dog.eatFood(someFood.getFood());
     }
 }
