@@ -7,9 +7,9 @@ public class Logic {
 
     Logic (){
         master.addCat();
-        master.addDog(dog_types.POODLE);
-        master.addDog(dog_types.SHEPHERD);
-        master.addDog(dog_types.TERRIER);
+        master.addDog(DogTypes.POODLE);
+        master.addDog(DogTypes.SHEPHERD);
+        master.addDog(DogTypes.TERRIER);
     }
     public String giveCommand(int i, String command){
         if (master.pets.get(i) instanceof Cat)

@@ -1,15 +1,15 @@
 package sample;
 
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class DogFood {
-    private Vector foods;
+    private ArrayList<String> foods;
 
-    private Vector FoodList;
+    private ArrayList<String> FoodList;
 
     DogFood(){
-        FoodList = new Vector();
+        FoodList = new ArrayList<>();
         FoodList.add("Sausage");
         FoodList.add("Carrot");
         FoodList.add("Fish");
@@ -20,7 +20,7 @@ public class DogFood {
 
     public void fill(int n){
         Random rand = new Random();
-        foods = new Vector();
+        foods = new ArrayList<>();
         for (int i = 0; i < n; i++){
             foods.add(FoodList.get(rand.nextInt(FoodList.size()-1)));
         }

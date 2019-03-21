@@ -1,21 +1,18 @@
 package sample;
 
 import java.util.Random;
-import java.util.Vector;
+import java.util.ArrayList;
 
-enum dog_types {
-    POODLE, SHEPHERD, TERRIER
-}
 public class Master {
 
     private DogFood someFood = new DogFood();
+    public ArrayList<Pet> pets = new ArrayList<>();
 
     Master() {
         Random r = new Random();
         int n = r.nextInt(11);
         someFood.fill(n);
     }
-    public Vector<Pet> pets = new Vector<Pet>();
 
     public void addCat (){
         pets.add(new Cat());
@@ -23,7 +20,8 @@ public class Master {
     public void addCat (Cat cat){
         pets.add(cat);
     }
-    public void addDog (dog_types type){
+
+    public void addDog (DogTypes type){
         switch (type) {
             case TERRIER: {
                 pets.add(new Terrier());
