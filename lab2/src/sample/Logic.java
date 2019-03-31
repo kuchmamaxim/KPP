@@ -1,33 +1,38 @@
 package sample;
 
-import java.util.Vector;
-
 public class Logic {
-    private Master master = new Master();
-
-    Logic (){
-        master.addCat();
-        master.addDog(DogTypes.POODLE);
-        master.addDog(DogTypes.SHEPHERD);
-        master.addDog(DogTypes.TERRIER);
+    Logic() {
     }
-    public String giveCommand(int i, String command){
-        if (master.pets.get(i) instanceof Cat)
+
+    public String giveCommand(Master master, int dogNum, String command) {
+        Master master1 = new Master();
+        master1.addCat();
+        if (master.pets.get(dogNum) instanceof Cat)
             return "Cat can't execute your commands!";
-        return master.giveACommand((Dog)master.pets.get(i), command);
+        return master.giveACommand((Dog) master.pets.get(dogNum), command);
     }
 
-    public String feed(int i){
-        if (master.pets.get(i) instanceof Cat)
+    public String feed(Master master, int dogNum) {
+        if (master.pets.get(dogNum) instanceof Cat)
             return "Cat doesn't eat dog food!";
-        return master.giveFood((Dog) master.pets.get(i));
+        return master.giveFood((Dog) master.pets.get(dogNum));
     }
 
-    public Vector<String> getPetList() {
-        Vector<String> petList = new Vector<String>();
-        for (int i = 0; i < master.pets.size(); i++) {
-            petList.add(master.pets.get(i).getName());
-        }
-        return petList;
+    public String walk(Master master, int dogNum) {
+        if (master.pets.get(dogNum) instanceof Cat)
+            return "Cat's don't like walking!";
+        return master.walkADog((Dog) master.pets.get(dogNum));
+    }
+
+    public String sleep(int catNum, Master master) {
+        if (master.pets.get(catNum) instanceof Dog)
+            return "Dog's are always full of energy!";
+        return ((Cat)master.pets.get(catNum)).sleep();
+    }
+
+    public String askFood(int dogNum, Master master) {
+        if (master.pets.get(dogNum) instanceof Cat)
+            return "Cat's don't ask, they always take what they want!";
+        return ((Dog)master.pets.get(dogNum)).askFood();
     }
 }

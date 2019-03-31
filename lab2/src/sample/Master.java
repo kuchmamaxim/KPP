@@ -14,14 +14,11 @@ public class Master {
         someFood.fill(n);
     }
 
-    public void addCat (){
+    public void addCat() {
         pets.add(new Cat());
     }
-    public void addCat (Cat cat){
-        pets.add(cat);
-    }
 
-    public void addDog (DogTypes type){
+    public void addDog(DogTypes type) {
         switch (type) {
             case TERRIER: {
                 pets.add(new Terrier());
@@ -42,9 +39,21 @@ public class Master {
         return dog.execCommand(command);
     }
 
-    String giveFood (Dog dog) {
+    String giveFood(Dog dog) {
         if (someFood.foodsLeft() == 0)
             return "error: THERE IS NO FOOD IN YOUR BAG";
         return dog.eatFood(someFood.getFood());
+    }
+
+    String walkADog(Dog dog) {
+        return "I'd rather prefer to follow Brodsky advice...";
+    }
+
+    public ArrayList<String> getPetList() {
+        ArrayList<String> petList = new ArrayList<String>();
+        for (int i = 0; i < pets.size(); i++) {
+            petList.add(pets.get(i).getName());
+        }
+        return petList;
     }
 }

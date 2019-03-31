@@ -18,7 +18,7 @@ public class DogFood {
     }
 
     public String getFood(){
-        String answer = foods.get(0).toString();
+        String answer = foods.get(0);
         foods.remove(0);
         return answer;
     }
