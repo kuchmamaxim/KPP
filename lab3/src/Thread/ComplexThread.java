@@ -24,17 +24,15 @@ public class ComplexThread extends Thread {
         Double xResult = Math.pow(module, 1.0 / n) * Math.cos((argument + 2 * Math.PI * k) / n);
         Double yResult = Math.pow(module, 1.0 / n) * Math.sin((argument + 2 * Math.PI * k) / n);
         DecimalFormat formatter = new DecimalFormat("#0.000");
-        String sign = new String();
+        String sign;
         if (yResult < 0)
             sign = " ";
         else
             sign = " + ";
         String result = formatter.format(xResult) + sign + formatter.format(yResult) + "i";
         try {
-            String message = exchanger.exchange(result);
+            exchanger.exchange(result);
         } catch (Exception ex) {
         }
-        System.out.println(module);
-        System.out.println(argument);
     }
 }
