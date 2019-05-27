@@ -2,23 +2,41 @@ package hello;
 
 public class Number {
 
-    private Integer decNum;
+    private Integer decNum = 0;
     private String binNum;
 
-    public String setBinNum() {
-        binNum = Integer.toBinaryString(decNum);
-        return binNum;
+    public void setBinNum() {
+        if (isDecValid()) {
+            binNum = Integer.toBinaryString(decNum);
+        } else {
+            decNum = 0;
+            binNum = "Wrong argument!";
+        }
     }
 
-    public String setBinNum(String bin) {
-        binNum = bin;
-        decNum = Integer.parseInt(binNum, 2);
-        return binNum;
+    void setFromBinNum(String bin) {
+        if (bin.matches("[10]+")) {
+            binNum = bin;
+            decNum = Integer.parseInt(binNum, 2);
+        } else {
+            decNum = 0;
+            binNum = "Wrong argument!";
+        }
     }
 
-    public void setDecNum(Integer dexNum) {
-        this.decNum = dexNum;
+    public void setDecNum(Integer decNum) {
+        this.decNum = decNum;
         setBinNum();
+    }
+
+    void setFromDecNum(String decNum) {
+        if (isDecValid() && decNum.matches("[0123456789]+")) {
+            this.decNum = Integer.parseInt(decNum);
+            setBinNum();
+        } else {
+            this.decNum = 0;
+            binNum = "Wrong argument!";
+        }
     }
 
     public String getBinNum() {
@@ -27,6 +45,10 @@ public class Number {
 
     public Integer getDecNum() {
         return decNum;
+    }
+
+    private Boolean isDecValid() {
+        return decNum >= 0;
     }
 
 }
