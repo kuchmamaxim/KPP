@@ -10,6 +10,12 @@ public class Number {
         return binNum;
     }
 
+    public String setBinNum(String bin) {
+        binNum = bin;
+        decNum = Integer.parseInt(binNum, 2);
+        return binNum;
+    }
+
     public void setDecNum(Integer dexNum) {
         this.decNum = dexNum;
         setBinNum();
@@ -22,12 +28,5 @@ public class Number {
     public Integer getDecNum() {
         return decNum;
     }
-    /*public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }*/
 
 }
